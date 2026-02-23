@@ -397,6 +397,189 @@ body {
   opacity: 0.85;
 }
 
+/* Club rules link on home */
+.home-clubrules-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  color: white;
+  transition: transform 0.15s;
+}
+
+.home-clubrules-link:active {
+  transform: scale(0.98);
+}
+
+/* Club rules page styles */
+.clubrules-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clubrules-cat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clubrules-cat-card:active {
+  transform: scale(0.98);
+}
+
+.clubrules-cat-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.clubrules-cat-info {
+  flex: 1;
+}
+
+.clubrules-cat-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.clubrules-cat-count {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.clubrules-cat-arrow {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.clubrules-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clubrules-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clubrules-item:active {
+  transform: scale(0.98);
+}
+
+.clubrules-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.clubrules-item-arrow {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.clubrules-detail {
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.clubrules-detail ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.clubrules-detail ul li {
+  margin-bottom: 4px;
+  white-space: normal;
+}
+
+.club-rule-sub {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 16px 0 8px;
+  white-space: normal;
+}
+
+.club-rule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  margin: 10px 0;
+  white-space: normal;
+}
+
+.club-rule-table th,
+.club-rule-table td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.club-rule-table th {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.club-rule-table td {
+  background: var(--bg-card);
+}
+
+[data-theme="dark"] .club-rule-table th {
+  background: var(--primary-dark);
+}
+
+.schedule-list {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.schedule-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  white-space: normal !important;
+  font-size: 0.8rem;
+}
+
+.schedule-list li:last-child {
+  border-bottom: none;
+}
+
+.sch-date {
+  display: inline-block;
+  min-width: 48px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
 /* Updates link at bottom of home */
 .home-updates-link {
   display: block;

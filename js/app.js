@@ -155,6 +155,21 @@
     });
     grid.parentElement.insertBefore(philosophyBanner, grid);
 
+    // Add club rules banner before grid
+    const clubRulesBanner = document.createElement('div');
+    clubRulesBanner.className = 'home-clubrules-link';
+    clubRulesBanner.innerHTML = `
+      <div class="home-philosophy-icon">🏛️</div>
+      <div class="home-philosophy-body">
+        <div class="home-philosophy-title">鶴舞カントリー倶楽部の競技規則</div>
+        <div class="home-philosophy-desc">競技規則・ハンディキャップ規定・競技日程</div>
+      </div>
+    `;
+    clubRulesBanner.addEventListener('click', () => {
+      showClubRulesPage();
+    });
+    grid.parentElement.insertBefore(clubRulesBanner, grid);
+
     // Add updates link
     const updatesLink = document.createElement('div');
     updatesLink.className = 'home-updates-link';
@@ -272,6 +287,100 @@
     });
 
     modal.classList.add('active');
+  }
+
+  // ============================================
+  // Club Rules Page
+  // ============================================
+  function showClubRulesPage() {
+    const modal = document.getElementById('situationModal');
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+    const bookmarkBtn = document.getElementById('modalBookmark');
+
+    title.textContent = '鶴舞カントリー倶楽部の競技規則';
+    bookmarkBtn.style.display = 'none';
+
+    let html = '<div class="clubrules-categories">';
+    CLUB_RULES_DATA.categories.forEach(cat => {
+      html += `
+        <div class="clubrules-cat-card" data-cat="${cat.id}">
+          <div class="clubrules-cat-icon">${cat.icon}</div>
+          <div class="clubrules-cat-info">
+            <div class="clubrules-cat-title">${cat.title}</div>
+            <div class="clubrules-cat-count">${cat.items.length}項目</div>
+          </div>
+          <span class="clubrules-cat-arrow">▶</span>
+        </div>
+      `;
+    });
+    html += '</div>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('.clubrules-cat-card').forEach(card => {
+      card.addEventListener('click', () => {
+        showClubRuleCategory(card.dataset.cat);
+      });
+    });
+
+    modal.classList.add('active');
+  }
+
+  function showClubRuleCategory(categoryId) {
+    const cat = CLUB_RULES_DATA.categories.find(c => c.id === categoryId);
+    if (!cat) return;
+
+    const modal = document.getElementById('situationModal');
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+    const bookmarkBtn = document.getElementById('modalBookmark');
+
+    title.textContent = cat.icon + ' ' + cat.title;
+    bookmarkBtn.style.display = 'none';
+
+    let html = '<div class="clubrules-items">';
+    cat.items.forEach((item, idx) => {
+      html += `
+        <div class="clubrules-item" data-cat="${categoryId}" data-idx="${idx}">
+          <div class="clubrules-item-title">${item.title}</div>
+          <span class="clubrules-item-arrow">▶</span>
+        </div>
+      `;
+    });
+    html += '</div>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('.clubrules-item').forEach(item => {
+      item.addEventListener('click', () => {
+        showClubRuleDetail(item.dataset.cat, parseInt(item.dataset.idx));
+      });
+    });
+
+    modal.classList.add('active');
+  }
+
+  function showClubRuleDetail(categoryId, itemIdx) {
+    const cat = CLUB_RULES_DATA.categories.find(c => c.id === categoryId);
+    if (!cat) return;
+    const item = cat.items[itemIdx];
+    if (!item) return;
+
+    const modal = document.getElementById('situationModal');
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+    const bookmarkBtn = document.getElementById('modalBookmark');
+
+    title.textContent = item.title;
+    bookmarkBtn.style.display = 'none';
+
+    body.innerHTML = `
+      <div class="clubrules-detail">
+        ${item.content}
+      </div>
+    `;
+
+    modal.classList.add('active');
+    body.scrollTop = 0;
   }
 
   // ============================================
