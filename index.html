@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Golf Rules">
+  <meta name="theme-color" content="#1a5632">
+  <title>ゴルフ規則 2023</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <h1 class="header-title">ゴルフ規則 2023</h1>
+      <div class="header-controls">
+        <div class="font-size-controls" id="fontSizeControls">
+          <button class="font-btn" id="fontDecrease" aria-label="文字を小さく">A-</button>
+          <button class="font-btn" id="fontIncrease" aria-label="文字を大きく">A+</button>
+        </div>
+        <button class="header-btn" id="darkModeToggle" aria-label="ダークモード切替">
+          <span class="icon">☀️</span>
+        </button>
+      </div>
+    </div>
+    <!-- Global Search Bar -->
+    <div class="search-container" id="searchContainer">
+      <input type="search" id="globalSearch" placeholder="規則番号またはキーワードで検索..." autocomplete="off" enterkeyhint="search">
+      <button class="search-clear" id="searchClear" aria-label="クリア">&times;</button>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="app-main" id="appMain">
+
+    <!-- Home / Quick Guide View -->
+    <section class="view active" id="viewHome">
+      <h2 class="section-title">よくある状況</h2>
+      <div class="quick-grid" id="quickGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Rules List View -->
+    <section class="view" id="viewRules">
+      <h2 class="section-title">規則一覧</h2>
+      <div class="rules-list" id="rulesList">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Search Results View -->
+    <section class="view" id="viewSearch">
+      <div class="search-info" id="searchInfo"></div>
+      <div class="search-results" id="searchResults">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Definitions View -->
+    <section class="view" id="viewDefs">
+      <h2 class="section-title">定義集</h2>
+      <div class="defs-search-wrap">
+        <input type="search" id="defsSearch" placeholder="用語を検索..." autocomplete="off">
+      </div>
+      <div class="defs-list" id="defsList">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Bookmarks View -->
+    <section class="view" id="viewBookmarks">
+      <h2 class="section-title">ブックマーク</h2>
+      <div class="bookmarks-list" id="bookmarksList">
+        <p class="empty-message">ブックマークはまだありません。<br>規則やガイドの<span class="star-demo">☆</span>をタップして追加できます。</p>
+      </div>
+    </section>
+
+    <!-- Updates View -->
+    <section class="view" id="viewUpdates">
+      <h2 class="section-title">更新情報</h2>
+      <div class="updates-content" id="updatesContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Situation Detail Modal -->
+    <div class="modal" id="situationModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="modal-back" id="modalBack" aria-label="戻る">&larr;</button>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <button class="modal-bookmark" id="modalBookmark" aria-label="ブックマーク">☆</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Rule Detail Modal -->
+    <div class="modal" id="ruleModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="modal-back" id="ruleModalBack" aria-label="戻る">&larr;</button>
+          <h3 class="modal-title" id="ruleModalTitle"></h3>
+          <button class="modal-bookmark" id="ruleModalBookmark" aria-label="ブックマーク">☆</button>
+        </div>
+        <div class="modal-body" id="ruleModalBody">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-view="viewHome">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">ホーム</span>
+    </button>
+    <button class="nav-item" data-view="viewRules">
+      <span class="nav-icon">📖</span>
+      <span class="nav-label">規則</span>
+    </button>
+    <button class="nav-item" data-view="viewSearch" id="navSearch">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-label">検索</span>
+    </button>
+    <button class="nav-item" data-view="viewDefs">
+      <span class="nav-icon">📝</span>
+      <span class="nav-label">定義</span>
+    </button>
+    <button class="nav-item" data-view="viewBookmarks">
+      <span class="nav-icon">⭐</span>
+      <span class="nav-label">保存</span>
+    </button>
+  </nav>
+
+  <script src="js/data.js?v=5"></script>
+  <script src="js/quickguide.js?v=5"></script>
+  <script src="js/search.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
+</body>
+</html>
