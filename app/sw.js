@@ -3,13 +3,14 @@
  * 完全オフライン対応
  */
 
-const CACHE_NAME = 'golf-rules-v7';
+const CACHE_NAME = 'golf-rules-v8';
 const ASSETS = [
   './',
   './index.html',
   './css/style.css',
   './js/data.js',
   './js/quickguide.js',
+  './js/club-rules.js',
   './js/search.js',
   './js/app.js',
   './manifest.json',
