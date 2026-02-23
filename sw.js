@@ -3,7 +3,7 @@
  * 完全オフライン対応
  */
 
-const CACHE_NAME = 'golf-rules-v5';
+const CACHE_NAME = 'golf-rules-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -14,7 +14,8 @@ const ASSETS = [
   './js/app.js',
   './manifest.json',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/logo.png'
 ];
 
 // Install - cache all assets

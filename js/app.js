@@ -140,6 +140,21 @@
 
     grid.innerHTML = html;
 
+    // Add philosophy banner before grid
+    const philosophyBanner = document.createElement('div');
+    philosophyBanner.className = 'home-philosophy-link';
+    philosophyBanner.innerHTML = `
+      <div class="home-philosophy-icon">⛳</div>
+      <div class="home-philosophy-body">
+        <div class="home-philosophy-title">ゴルフの原点・ルールの背景</div>
+        <div class="home-philosophy-desc">ゴルフとは何か、なぜルールがあるのかを知る</div>
+      </div>
+    `;
+    philosophyBanner.addEventListener('click', () => {
+      showPhilosophyPage();
+    });
+    grid.parentElement.insertBefore(philosophyBanner, grid);
+
     // Add updates link
     const updatesLink = document.createElement('div');
     updatesLink.className = 'home-updates-link';
@@ -228,6 +243,13 @@
       bookmarkBtn.className = 'modal-bookmark' + (isBookmarked(bmKey) ? ' bookmarked' : '');
     };
 
+    const notesHtml = sit.notes ? `
+      <div class="detail-notes">
+        <div class="detail-notes-label">⚠ 補足（競技委員向け）</div>
+        <div class="detail-notes-text">${sit.notes}</div>
+      </div>
+    ` : '';
+
     body.innerHTML = `
       <div class="detail-answer">
         <div class="detail-answer-label">回答</div>
@@ -237,6 +259,7 @@
         <div class="detail-procedure-label">具体的な手順</div>
         <div class="detail-procedure-text">${sit.procedure}</div>
       </div>
+      ${notesHtml}
       <button class="detail-rule-link" data-rule="${sit.rule}">
         📖 規則 ${sit.rule} を見る
       </button>
@@ -246,6 +269,91 @@
     body.querySelector('.detail-rule-link').addEventListener('click', (e) => {
       const ruleRef = e.target.dataset.rule;
       openRuleByRef(ruleRef);
+    });
+
+    modal.classList.add('active');
+  }
+
+  // ============================================
+  // Philosophy Page
+  // ============================================
+  function showPhilosophyPage() {
+    const modal = document.getElementById('situationModal');
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+    const bookmarkBtn = document.getElementById('modalBookmark');
+
+    title.textContent = 'ゴルフの原点・ルールの背景';
+    bookmarkBtn.style.display = 'none';
+
+    body.innerHTML = `
+      <div class="philosophy-intro">
+        ゴルフの規則を正しく理解するためには、まず「ゴルフとは何か」を知ることが大切です。
+        ここではゴルフの本質と、規則が存在する背景を解説します。
+      </div>
+
+      <div class="philosophy-section">
+        <div class="philosophy-section-number">1</div>
+        <h4 class="philosophy-section-title">ゴルフとは何か</h4>
+        <div class="philosophy-section-body">
+          <p>ゴルフは、コースの1番ホールのティーイングエリアから始めて、クラブで球を1回または連続して打ち、18番ホール（またはそのラウンドの最終ホール）のパッティンググリーン上のホールに入れることでプレーします。</p>
+          <p>各ホールでは、ティーイングエリアから球を打ち出し（ティーショット）、フェアウェイやラフを経て、グリーン上のホール（カップ）に球を沈めるまでが1つの単位となります。</p>
+          <p>ゴルフは自分自身の<strong>誠実さ</strong>に基づいてプレーするゲームです。他の多くのスポーツとは異なり、通常は審判が常に立ち会うことなく行われます。プレーヤーは規則を知り、自らに罰を課すことが求められます。</p>
+        </div>
+        <button class="philosophy-rule-btn" data-rule="1.1">
+          📖 規則 1.1「ゴルフのゲーム」を見る
+        </button>
+      </div>
+
+      <div class="philosophy-section">
+        <div class="philosophy-section-number">2</div>
+        <h4 class="philosophy-section-title">ルールの背景</h4>
+        <div class="philosophy-section-body">
+          <p>ゴルフ規則は主に3つの基本原則から成り立っています。これらの原則を理解すれば、個々の規則がなぜそのように定められているのかがわかります。</p>
+        </div>
+      </div>
+
+      <div class="philosophy-subsection">
+        <h5 class="philosophy-sub-title">コースはあるがままにプレーする</h5>
+        <div class="philosophy-section-body">
+          <p>プレーヤーは、コース上に存在する状態をそのまま受け入れてプレーしなければなりません。コース上の状態を自分に有利になるように変えることは原則として認められていません。</p>
+          <p>例えば、スタンスの場所を作るために枝を折ったり、球の前方にある木の枝を押さえたりすることは規則違反になります。コースは自然の中でプレーするものであり、あるがままの状態を受け入れることがゴルフの基本精神です。</p>
+        </div>
+        <button class="philosophy-rule-btn" data-rule="1.2">
+          📖 規則 1.2「プレーヤーの行動基準」を見る
+        </button>
+      </div>
+
+      <div class="philosophy-subsection">
+        <h5 class="philosophy-sub-title">球はあるがままにプレーする</h5>
+        <div class="philosophy-section-body">
+          <p>止まっている球は、規則が認める場合を除き、あるがままの状態でプレーしなければなりません。球のライを改善したり、球を動かしたりすることは原則として認められません。</p>
+          <p>ただし、規則が認める特定の状況（パッティンググリーン上でのマーク、救済の適用など）では、球を拾い上げたり動かしたりすることができます。この原則を理解すると、「いつ球に触れてよいか」「いつ触れてはいけないか」の判断が容易になります。</p>
+        </div>
+        <button class="philosophy-rule-btn" data-rule="1.3">
+          📖 規則 1.3「規則に従ってプレーする」を見る
+        </button>
+      </div>
+
+      <div class="philosophy-subsection">
+        <h5 class="philosophy-sub-title">個人の挑戦のゲーム</h5>
+        <div class="philosophy-section-body">
+          <p>ゴルフは他のプレーヤーとの直接的な対戦ではなく、<strong>コースへの挑戦</strong>です。プレーヤーはコースが提示する課題に対して自らの技量と判断力で挑みます。</p>
+          <p>そのため、ゴルフでは他のプレーヤーの行動に妨げられることなく、自分のペースでプレーすることが尊重されます。同時に、他のプレーヤーへの配慮（安全の確認、プレーの妨げにならないこと、コースの保護）も大切なマナーとして規則に定められています。</p>
+        </div>
+      </div>
+
+      <div class="philosophy-footer">
+        これらの原則を念頭に置くことで、ラウンド中に遭遇する様々な状況において、
+        規則の趣旨に沿った正しい判断ができるようになります。
+      </div>
+    `;
+
+    // Rule link handlers
+    body.querySelectorAll('.philosophy-rule-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openRuleByRef(btn.dataset.rule);
+      });
     });
 
     modal.classList.add('active');
