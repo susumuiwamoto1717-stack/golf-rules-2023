@@ -12,6 +12,7 @@
   let searchEngine;
   let searchHistory;
   let bookmarks = loadBookmarks();
+  let modalNavStack = [];
 
   // ============================================
   // Initialization
@@ -196,6 +197,7 @@
     const cat = QUICKGUIDE_DATA.categories.find(c => c.id === categoryId);
     if (!cat) return;
 
+    modalNavStack = [];
     const modal = document.getElementById('situationModal');
     const title = document.getElementById('modalTitle');
     const body = document.getElementById('modalBody');
@@ -293,6 +295,7 @@
   // Club Rules Page
   // ============================================
   function showClubRulesPage() {
+    modalNavStack = [];
     const modal = document.getElementById('situationModal');
     const title = document.getElementById('modalTitle');
     const body = document.getElementById('modalBody');
@@ -330,6 +333,8 @@
     const cat = CLUB_RULES_DATA.categories.find(c => c.id === categoryId);
     if (!cat) return;
 
+    modalNavStack.push(() => showClubRulesPage());
+
     const modal = document.getElementById('situationModal');
     const title = document.getElementById('modalTitle');
     const body = document.getElementById('modalBody');
@@ -365,6 +370,8 @@
     const item = cat.items[itemIdx];
     if (!item) return;
 
+    modalNavStack.push(() => showClubRuleCategory(categoryId));
+
     const modal = document.getElementById('situationModal');
     const title = document.getElementById('modalTitle');
     const body = document.getElementById('modalBody');
@@ -387,6 +394,7 @@
   // Philosophy Page
   // ============================================
   function showPhilosophyPage() {
+    modalNavStack = [];
     const modal = document.getElementById('situationModal');
     const title = document.getElementById('modalTitle');
     const body = document.getElementById('modalBody');
@@ -1021,7 +1029,12 @@
   // ============================================
   function initModals() {
     document.getElementById('modalBack').addEventListener('click', () => {
-      document.getElementById('situationModal').classList.remove('active');
+      if (modalNavStack.length > 0) {
+        const goBack = modalNavStack.pop();
+        goBack();
+      } else {
+        document.getElementById('situationModal').classList.remove('active');
+      }
     });
 
     document.getElementById('ruleModalBack').addEventListener('click', () => {
